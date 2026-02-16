@@ -1,0 +1,66 @@
+@import './reset.css';
+@import './variables.css';
+
+body {
+    font-family: var(--font-family-base);
+    color: var(--text-main);
+    background-color: var(--bg-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family-display);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    color: var(--text-main);
+    margin-bottom: var(--space-4);
+}
+
+h1 {
+    font-size: var(--text-3xl);
+}
+
+h2 {
+    font-size: var(--text-2xl);
+}
+
+h3 {
+    font-size: var(--text-xl);
+}
+
+a:hover {
+    color: var(--color-primary-600);
+    transition: color var(--transition-base);
+}
+
+/* Accessibility: Visible Focus */
+:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gray-400);
+}

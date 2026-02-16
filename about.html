@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Student Finance Tracker</title>
+
+    <!-- Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/components.css">
+
+    <style>
+        /* Page Specific Layout */
+        .app-header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--color-gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+        }
+
+        .brand {
+            font-family: var(--font-family-display);
+            font-size: var(--text-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary-600);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .main-nav {
+            display: flex;
+            gap: var(--space-6);
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-weight: var(--font-weight-medium);
+            padding: var(--space-2);
+            border-radius: var(--radius-md);
+            transition: color var(--transition-base);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--color-primary-600);
+            background-color: var(--color-primary-100);
+        }
+
+        /* Mobile Responsive Logic */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 4rem;
+                left: 0;
+                right: 0;
+                background-color: var(--bg-card);
+                flex-direction: column;
+                padding: var(--space-4);
+                box-shadow: var(--shadow-md);
+                border-bottom: 1px solid var(--color-gray-200);
+            }
+
+            /* Checkbox Hack for Mobile Menu */
+            #nav-toggle:checked~.main-nav {
+                display: flex;
+            }
+
+            .nav-toggle-label {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                cursor: pointer;
+                padding: var(--space-2);
+            }
+
+            .nav-toggle-label span {
+                display: block;
+                width: 24px;
+                height: 2px;
+                background-color: var(--text-main);
+            }
+        }
+
+        @media (min-width: 769px) {
+
+            .nav-toggle-label,
+            #nav-toggle {
+                display: none;
+            }
+        }
+
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--color-gray-200);
+            padding: var(--space-8) 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="app-header">
+        <div class="container nav-container">
+            <div class="brand">
+                <span
+                    style="background: var(--color-primary-600); color: white; padding: 0.25rem 0.5rem; border-radius: 8px; font-size: 0.8em; font-weight: bold;">SF.</span>
+                StudentFinance
+            </div>
+
+            <!-- Mobile Nav Toggle -->
+            <input type="checkbox" id="nav-toggle" class="hidden">
+            <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="transactions.html" class="nav-link">Transactions</a>
+                <a href="settings.html" class="nav-link">Settings</a>
+                <a href="about.html" class="nav-link active">About</a>
+            </nav>
+            <button class="btn btn-outline"
+                style="border-radius: var(--radius-full); margin-left: auto; margin-right: var(--space-4);">
+                JD
+            </button>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: var(--space-8); padding-bottom: var(--space-8);">
+
+        <h1>About Us</h1>
+
+        <div class="card">
+            <h2 style="font-size: var(--text-xl);">Student Finance Tracker</h2>
+            <p class="text-muted" style="margin-bottom: var(--space-4);">Version 1.0.0</p>
+
+            <p style="margin-bottom: var(--space-4);">
+                <strong>Student Finance Tracker</strong> is a dedicated tool designed to help students manage their
+                budget, track expenses, and plan for financial success.
+                It provides a simple yet powerful interface to keep your finances in check without the complexity of
+                full-blown accounting software.
+            </p>
+
+            <hr style="border: 0; border-top: 1px solid var(--color-gray-200); margin: var(--space-6) 0;">
+
+            <h3>Key Features</h3>
+            <ul style="list-style-type: disc; margin-left: var(--space-4); margin-bottom: var(--space-6);">
+                <li>Track daily expenses and income.</li>
+                <li>Categorize transactions for better insights.</li>
+                <li>Visualize spending habits with dashboard summaries.</li>
+                <li>Mobile-friendly design for on-the-go tracking.</li>
+            </ul>
+
+            <h3>Contact</h3>
+            <div class="flex gap-4" style="flex-direction: column;">
+                <div>
+                    <strong>Developer:</strong> Ines Karega
+                </div>
+                <div>
+                    <strong>GitHub:</strong> <a href="https://github.com/Ines-karega"
+                        style="color: var(--color-primary-600); text-decoration: underline;">https://github.com/Ines-karega</a>
+                </div>
+                <div>
+                    <strong>Email:</strong> <a href="mailto:i.karega@alustudent.com"
+                        style="color: var(--color-primary-600); text-decoration: underline;">i.karega@alustudent.com</a>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Student Finance Tracker. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

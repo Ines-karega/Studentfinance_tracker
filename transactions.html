@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions - Student Finance Tracker</title>
+
+    <!-- Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/components.css">
+
+    <style>
+        /* Page Specific Layout */
+        .app-header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--color-gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+        }
+
+        .brand {
+            font-family: var(--font-family-display);
+            font-size: var(--text-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary-600);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .main-nav {
+            display: flex;
+            gap: var(--space-6);
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            font-weight: var(--font-weight-medium);
+            padding: var(--space-2);
+            border-radius: var(--radius-md);
+            transition: color var(--transition-base);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--color-primary-600);
+            background-color: var(--color-primary-100);
+        }
+
+        /* Transactions Table */
+        .table-container {
+            overflow-x: auto;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-gray-200);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--color-gray-50);
+            padding: var(--space-3) var(--space-4);
+            font-size: var(--text-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: var(--space-3) var(--space-4);
+            border-top: 1px solid var(--color-gray-100);
+            font-size: var(--text-sm);
+        }
+
+        tr:hover td {
+            background-color: var(--color-gray-50);
+        }
+
+        /* Mobile Responsive Logic */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 4rem;
+                left: 0;
+                right: 0;
+                background-color: var(--bg-card);
+                flex-direction: column;
+                padding: var(--space-4);
+                box-shadow: var(--shadow-md);
+                border-bottom: 1px solid var(--color-gray-200);
+            }
+
+            /* Checkbox Hack for Mobile Menu */
+            #nav-toggle:checked~.main-nav {
+                display: flex;
+            }
+
+            .nav-toggle-label {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                cursor: pointer;
+                padding: var(--space-2);
+            }
+
+            .nav-toggle-label span {
+                display: block;
+                width: 24px;
+                height: 2px;
+                background-color: var(--text-main);
+            }
+
+            /* Mobile Cards for Table */
+            thead {
+                display: none;
+            }
+
+            tr {
+                display: flex;
+                flex-direction: column;
+                border: 1px solid var(--color-gray-200);
+                margin-bottom: var(--space-4);
+                border-radius: var(--radius-md);
+                padding: var(--space-4);
+                background-color: var(--bg-card);
+            }
+
+            td {
+                border: none;
+                padding: var(--space-1) 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: var(--font-weight-medium);
+                color: var(--text-muted);
+                font-size: var(--text-xs);
+            }
+        }
+
+        @media (min-width: 769px) {
+
+            .nav-toggle-label,
+            #nav-toggle {
+                display: none;
+            }
+        }
+
+        .fab {
+            position: fixed;
+            bottom: var(--space-6);
+            right: var(--space-6);
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: var(--radius-full);
+            background-color: var(--color-primary-600);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-primary);
+            font-size: var(--text-2xl);
+            border: none;
+            cursor: pointer;
+            z-index: 50;
+        }
+
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--color-gray-200);
+            padding: var(--space-8) 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="app-header">
+        <div class="container nav-container">
+            <div class="brand">
+                <span
+                    style="background: var(--color-primary-600); color: white; padding: 0.25rem 0.5rem; border-radius: 8px; font-size: 0.8em;">SF.</span>
+                StudentFinance
+            </div>
+
+            <!-- Mobile Nav Toggle -->
+            <input type="checkbox" id="nav-toggle" class="hidden">
+            <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="transactions.html" class="nav-link active">Transactions</a>
+                <a href="settings.html" class="nav-link">Settings</a>
+                <a href="about.html" class="nav-link">About</a>
+            </nav>
+            <button class="btn btn-outline"
+                style="border-radius: var(--radius-full); margin-left: auto; margin-right: var(--space-4);">
+                JD
+            </button>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: var(--space-8); padding-bottom: var(--space-8);">
+
+        <div class="flex justify-between items-center" style="margin-bottom: var(--space-6);">
+            <h1>Transactions</h1>
+            <!-- Search bar could go here -->
+        </div>
+
+        <!-- Filter / Search Section -->
+        <div class="card" style="margin-bottom: var(--space-6);">
+            <div class="flex gap-4" style="flex-wrap: wrap;">
+                <div class="form-group" style="flex: 2; min-width: 200px; margin-bottom: 0;">
+                    <input type="text" class="form-input" placeholder="Search transactions...">
+                </div>
+                <div class="form-group" style="flex: 1; min-width: 150px; margin-bottom: 0;">
+                    <select class="form-select">
+                        <option value="">All Categories</option>
+                        <option value="food">Food</option>
+                        <option value="books">Books</option>
+                        <option value="transport">Transport</option>
+                    </select>
+                </div>
+                <div class="form-group" style="flex: 1; min-width: 150px; margin-bottom: 0;">
+                    <select class="form-select">
+                        <option value="date-desc">Date (Newest)</option>
+                        <option value="date-asc">Date (Oldest)</option>
+                        <option value="amount-desc">Amount (High-Low)</option>
+                        <option value="amount-asc">Amount (Low-High)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- DATA TABLE (Responsive) -->
+        <div class="card" style="padding: 0; overflow: hidden;">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th class="text-right">Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Row 1 -->
+                        <tr>
+                            <td data-label="Date">Feb 24, 2026</td>
+                            <td data-label="Description"><strong>Physics Textbook</strong></td>
+                            <td data-label="Category"><span class="badge badge-neutral">Books</span></td>
+                            <td data-label="Amount" class="text-right" style="color: var(--color-success)">$89.99</td>
+                            <td data-label="Actions">
+                                <div class="flex gap-2">
+                                    <button class="btn btn-sm btn-outline" aria-label="Edit"
+                                        onclick="document.getElementById('add-modal').showModal()">Edit</button>
+                                    <button class="btn btn-sm btn-danger" aria-label="Delete">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr>
+                            <td data-label="Date">Feb 22, 2026</td>
+                            <td data-label="Description"><strong>Cafeteria Lunch</strong></td>
+                            <td data-label="Category"><span class="badge badge-neutral">Food</span></td>
+                            <td data-label="Amount" class="text-right" style="color: var(--color-success)">$12.50</td>
+                            <td data-label="Actions">
+                                <div class="flex gap-2">
+                                    <button class="btn btn-sm btn-outline" aria-label="Edit"
+                                        onclick="document.getElementById('add-modal').showModal()">Edit</button>
+                                    <button class="btn btn-sm btn-danger" aria-label="Delete">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr>
+                            <td data-label="Date">Feb 20, 2026</td>
+                            <td data-label="Description"><strong>Part-time Salary</strong></td>
+                            <td data-label="Category"><span class="badge badge-neutral">Income</span></td>
+                            <td data-label="Amount" class="text-right" style="color: var(--color-success)">$450.00</td>
+                            <td data-label="Actions">
+                                <div class="flex gap-2">
+                                    <button class="btn btn-sm btn-outline" aria-label="Edit"
+                                        onclick="document.getElementById('add-modal').showModal()">Edit</button>
+                                    <button class="btn btn-sm btn-danger" aria-label="Delete">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Student Finance Tracker. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button for Add -->
+    <a href="add-transaction.html" class="fab" aria-label="Add Transaction" title="Add Transaction">
+        +
+    </a>
+
+
+
+</body>
+
+</html>
