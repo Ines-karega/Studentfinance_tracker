@@ -83,6 +83,7 @@ function deleteTransaction(id) {
     let transactions = JSON.parse(localStorage.getItem('sf_transactions') || '[]');
     transactions = transactions.filter(tx => tx.id !== id);
     localStorage.setItem('sf_transactions', JSON.stringify(transactions));
+    showToast('Transaction deleted.', 'info');
     loadTransactions();
 }
 
@@ -126,15 +127,15 @@ function saveRow(id) {
     const category = document.getElementById(`edit-cat-${id}`).value;
     const amount = document.getElementById(`edit-amount-${id}`).value;
 
-    const descriptionRegex = /^\S(?:.*\S)?$/;
-    const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
+    const descriptionRegex = /^[A-Za-z0-9\s,.-]{3,50}$/;
+    const amountRegex = /^(?!0\d)\d+(\.\d{1,2})?$/;
 
     if (!descriptionRegex.test(description)) {
-        alert('Invalid description.');
+        showToast('Invalid description. Use 3-50 characters.', 'error');
         return;
     }
-    if (!amountRegex.test(amount)) {
-        alert('Invalid amount.');
+    if (!amountRegex.test(amount) || parseFloat(amount) <= 0) {
+        showToast('Invalid amount. Use a positive number.', 'error');
         return;
     }
 
@@ -143,6 +144,7 @@ function saveRow(id) {
     if (index !== -1) {
         transactions[index] = { ...transactions[index], date, description, category, amount: parseFloat(amount) };
         localStorage.setItem('sf_transactions', JSON.stringify(transactions));
+        showToast('Transaction updated.', 'success');
         loadTransactions();
     }
 }

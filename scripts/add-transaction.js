@@ -9,22 +9,21 @@ document.getElementById('add-form').addEventListener('submit', function (e) {
     const notes = document.getElementById('notes').value.trim();
 
     // Regex patterns
-    const descriptionRegex = /^\S(?:.*\S)?$/;
-    const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
-    const categoryRegex = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
+    const descriptionRegex = /^[A-Za-z0-9\s,.-]{3,50}$/; // 3-50 chars, alphanumeric and some symbols
+    const amountRegex = /^(?!0\d)\d+(\.\d{1,2})?$/; // Positive number, up to 2 decimals, no leading zeros unless 0.xx
 
     // Validation
     if (!descriptionRegex.test(description)) {
-        alert('Invalid description. Please avoid leading/trailing whitespace.');
+        showToast('Invalid description. Use 3-50 characters (alphanumeric).', 'error');
         return;
     }
-    if (!amountRegex.test(amount)) {
-        alert('Invalid amount. Please use numbers (e.g., 10 or 10.50).');
+    if (!amountRegex.test(amount) || parseFloat(amount) <= 0) {
+        showToast('Invalid amount. Please use a positive number (e.g., 10.50).', 'error');
         return;
     }
     // Category regex check (though it's a select, the requirement mentioned it)
-    if (!categoryRegex.test(category)) {
-        alert('Invalid category format.');
+    if (category === '') {
+        showToast('Please select a category.', 'warning');
         return;
     }
 
@@ -42,8 +41,12 @@ document.getElementById('add-form').addEventListener('submit', function (e) {
     transactions.push(newTransaction);
     localStorage.setItem('sf_transactions', JSON.stringify(transactions));
 
-    // Redirect back to transactions page
-    window.location.href = 'transactions.html';
+    showToast('Transaction added successfully!', 'success');
+
+    // Redirect back to transactions page after a short delay
+    setTimeout(() => {
+        window.location.href = 'transactions.html';
+    }, 1000);
 });
 
 // Set default date to today
