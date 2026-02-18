@@ -272,15 +272,15 @@
       <div class="dashboard-grid">
         <div class="card stat-card">
           <span class="stat-label">Total Balance</span>
-          <span class="stat-value" style="color: var(--color-primary-600);">$1,245.50</span>
+          <span class="stat-value" style="color: var(--color-primary-600);" id="total-balance">$0.00</span>
         </div>
         <div class="card stat-card">
           <span class="stat-label">Monthly Spend</span>
-          <span class="stat-value">$450.00</span>
+          <span class="stat-value" id="monthly-spend">$0.00</span>
         </div>
         <div class="card stat-card">
           <span class="stat-label">Remaining Budget</span>
-          <span class="stat-value" style="color: var(--color-success)">$800.00</span>
+          <span class="stat-value" style="color: var(--color-success)" id="remaining-budget">$0.00</span>
         </div>
       </div>
 
@@ -290,7 +290,7 @@
           <div class="flex justify-between items-center" style="margin-bottom: var(--space-4);">
             <div>
               <h2 style="margin-bottom: 2px;">7-Day Spending Trend</h2>
-              <p class="text-muted text-sm">Visual overview of your daily expenses</p>
+              <p class="text-muted text-sm" id="chart-period">Visual overview of your daily expenses</p>
             </div>
           </div>
           <div class="trend-chart-container" id="spending-chart">
@@ -311,27 +311,83 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      updateDashboard();
+    });
+
+    function updateDashboard() {
+      const transactions = JSON.parse(localStorage.getItem('sf_transactions') || '[]');
+
+      // Calculate Stats
+      let totalBalance = 0;
+      let monthlySpend = 0;
+      const now = new Date();
+      const currentMonth = now.getMonth();
+      const currentYear = now.getFullYear();
+
+      transactions.forEach(tx => {
+        const txDate = new Date(tx.date);
+        const amount = parseFloat(tx.amount);
+
+        // Assume "Income" category adds to balance, others subtract
+        if (tx.category.toLowerCase() === 'income') {
+          totalBalance += amount;
+        } else {
+          totalBalance -= amount;
+          // Calculate monthly spend (only expenses)
+          if (txDate.getMonth() === currentMonth && txDate.getFullYear() === currentYear) {
+            monthlySpend += amount;
+          }
+        }
+      });
+
+      // Update UI Stats
+      document.getElementById('total-balance').textContent = `$${totalBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+      document.getElementById('monthly-spend').textContent = `$${monthlySpend.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+
+      // Budget logic (simple placeholder: assume $2000 budget for now or pull from settings if available)
+      const budget = 2000;
+      const remaining = budget - monthlySpend;
+      document.getElementById('remaining-budget').textContent = `$${remaining.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+
+      // Update Trend Chart (Last 7 Days)
       const chart = document.getElementById('spending-chart');
       if (!chart) return;
+      chart.innerHTML = '';
 
-      const data = [45, 12, 89, 25, 67, 110, 32];
-      const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-      const max = Math.max(...data);
+      const last7Days = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        last7Days.push(d.toISOString().split('T')[0]);
+      }
 
-      labels.forEach((label, i) => {
-        const height = (data[i] / max) * 100;
+      const dailyData = last7Days.map(dateStr => {
+        return transactions
+          .filter(tx => tx.date === dateStr && tx.category.toLowerCase() !== 'income')
+          .reduce((sum, tx) => sum + parseFloat(tx.amount), 0);
+      });
+
+      const dayLabels = last7Days.map(dateStr => {
+        const d = new Date(dateStr);
+        return d.toLocaleDateString('en-US', { weekday: 'short' });
+      });
+
+      const max = Math.max(...dailyData, 10); // Min max of 10 for scaling
+
+      dayLabels.forEach((label, i) => {
+        const height = (dailyData[i] / max) * 100;
         const wrapper = document.createElement('div');
         wrapper.className = 'chart-bar-wrapper';
 
         wrapper.innerHTML = `
-          <div class="chart-bar ${i === 5 ? 'active' : ''}" style="height: ${height}%">
-            <div class="chart-tooltip">$${data[i]}</div>
+          <div class="chart-bar ${i === 6 ? 'active' : ''}" style="height: ${height}%">
+            <div class="chart-tooltip">$${dailyData[i].toFixed(2)}</div>
           </div>
           <div class="chart-label">${label}</div>
         `;
         chart.appendChild(wrapper);
       });
-    });
+    }
   </script>
 </body>
 
