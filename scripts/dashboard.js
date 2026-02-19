@@ -3,21 +3,38 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function updateDashboard() {
-  const transactions = JSON.parse(localStorage.getItem('sf_transactions') || '[]');
+  let transactions = [];
+  try {
+    transactions = JSON.parse(localStorage.getItem('sf_transactions') || '[]');
+    if (!Array.isArray(transactions)) transactions = [];
+  } catch (e) {
+    console.error('Error parsing transactions for dashboard:', e);
+    transactions = [];
+  }
 
   // Calculate Stats
   let totalBalance = 0;
   let monthlySpend = 0;
+  let totalAmount = 0;
+  const categoryCounts = {};
   const now = new Date();
   const currentMonth = now.getMonth();
   const currentYear = now.getFullYear();
 
   transactions.forEach(tx => {
-    const txDate = new Date(tx.date);
-    const amount = parseFloat(tx.amount);
+    const amount = parseFloat(tx.amount) || 0;
+    const txDate = new Date(tx.date); // Convert transaction date string to Date object
 
-    // Assume "Income" category adds to balance, others subtract
-    if (tx.category.toLowerCase() === 'income') {
+    totalAmount += amount;
+
+    // Track category frequency
+    const cat = tx.category || 'Uncategorized';
+    categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+
+    // Use transaction type if available, otherwise fallback to legacy "Income" check
+    const isIncome = tx.type ? tx.type === 'income' : (tx.category && tx.category.toLowerCase() === 'income');
+
+    if (isIncome) {
       totalBalance += amount;
     } else {
       totalBalance -= amount;
@@ -28,14 +45,29 @@ function updateDashboard() {
     }
   });
 
-  // Update UI Stats
-  document.getElementById('total-balance').textContent = `$${totalBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
-  document.getElementById('monthly-spend').textContent = `$${monthlySpend.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+  // Determine top category
+  let topCategory = '-';
+  let maxCount = 0;
+  for (const [cat, count] of Object.entries(categoryCounts)) {
+    if (count > maxCount) {
+      maxCount = count;
+      topCategory = cat;
+    }
+  }
 
-  // Budget logic (simple placeholder: assume $2000 budget for now or pull from settings if available)
-  const budget = 2000;
-  const remaining = budget - monthlySpend;
-  document.getElementById('remaining-budget').textContent = `$${remaining.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+  // Update UI Stats (with safety checks for removed elements)
+  const elements = {
+    'total-records': transactions.length.toString(),
+    'total-amount': formatCurrency(totalAmount),
+    'top-category': topCategory,
+    'total-balance': formatCurrency(totalBalance),
+    'monthly-spend': formatCurrency(monthlySpend)
+  };
+
+  for (const [id, value] of Object.entries(elements)) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
 
   // Update Trend Chart (Last 7 Days)
   const chart = document.getElementById('spending-chart');
@@ -69,7 +101,7 @@ function updateDashboard() {
 
     wrapper.innerHTML = `
       <div class="chart-bar ${i === 6 ? 'active' : ''}" style="height: ${height}%">
-        <div class="chart-tooltip">$${dailyData[i].toFixed(2)}</div>
+        <div class="chart-tooltip">${formatCurrency(dailyData[i])}</div>
       </div>
       <div class="chart-label">${label}</div>
     `;

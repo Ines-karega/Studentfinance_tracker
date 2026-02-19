@@ -46,8 +46,9 @@
 
   /* Typography */
   --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-family-display: 'Outfit', system-ui, -apple-system, sans-serif; /* For headings */
-  
+  --font-family-display: 'Outfit', system-ui, -apple-system, sans-serif;
+  /* For headings */
+
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
@@ -55,7 +56,7 @@
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
   --text-3xl: 1.875rem;
-  
+
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
@@ -83,4 +84,28 @@
 
   /* Transitions */
   --transition-base: 0.2s ease-in-out;
+}
+
+/* Dark Mode Overrides */
+.dark-theme {
+  --color-gray-50: #111827;
+  --color-gray-100: #1f2937;
+  --color-gray-200: #374151;
+  --color-gray-300: #4b5563;
+  --color-gray-400: #6b7280;
+  --color-gray-500: #9ca3af;
+  --color-gray-600: #d1d5db;
+  --color-gray-700: #e5e7eb;
+  --color-gray-800: #f3f4f6;
+  --color-gray-900: #f9fafb;
+
+  --bg-body: #0b0f1a;
+  --bg-card: #111827;
+  --bg-input: #1f2937;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
 }

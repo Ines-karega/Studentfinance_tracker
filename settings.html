@@ -159,21 +159,45 @@
                     <p class="text-muted text-sm">Switch between light and dark mode</p>
                 </div>
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" id="theme-toggle">
                     <span class="slider"></span>
                 </label>
             </div>
 
             <div class="form-group" style="padding-top: var(--space-4);">
-                <label class="form-label">Base Currency</label>
-                <select class="form-select" style="max-width: 200px;">
+                <label class="form-label" for="currency-select">Base Currency</label>
+                <select id="currency-select" class="form-select" style="max-width: 200px;">
                     <option value="USD">USD ($)</option>
                     <option value="EUR">EUR (€)</option>
                     <option value="GBP">GBP (£)</option>
                     <option value="RWF">RWF (FRW)</option>
                 </select>
+                <p class="text-muted text-sm mt-2">Note: This only changes displayed values using estimated rates.</p>
             </div>
 
+        </div>
+
+        <div class="card" style="margin-top: var(--space-6);">
+            <h2>Data Management</h2>
+            <p class="text-muted text-sm mb-4">Manage your local data. Use "Export Data" to save a copy of your records.
+            </p>
+
+            <div class="flex flex-col gap-6">
+                <div>
+                    <h3 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Export/Clear</h3>
+                    <div class="flex gap-4">
+                        <button id="export-btn" class="btn btn-outline">Export Data (JSON)</button>
+                        <button id="clear-btn" class="btn btn-danger">Clear All Data</button>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--color-gray-100); padding-top: var(--space-4);">
+                    <h3 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Import Data</h3>
+                    <p class="text-muted text-sm mb-4">Upload a JSON file to add records to your tracker.</p>
+                    <input type="file" id="import-file" accept=".json" class="hidden">
+                    <button id="import-btn" class="btn btn-primary">Import JSON File</button>
+                </div>
+            </div>
         </div>
 
     </main>
@@ -185,6 +209,7 @@
     </footer>
 
     <script src="scripts/utils.js"></script>
+    <script src="scripts/settings.js"></script>
 </body>
 
 </html>

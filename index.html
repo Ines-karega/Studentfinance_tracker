@@ -64,7 +64,7 @@
 
     .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: 1fr 1fr 1fr;
       gap: var(--space-6);
       margin-bottom: var(--space-8);
     }
@@ -158,7 +158,7 @@
       }
 
       .dashboard-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
       }
 
       /* Mobile Cards for Table */
@@ -266,21 +266,20 @@
 
       <div class="flex justify-between items-center" style="margin-bottom: var(--space-6);">
         <h1>Dashboard</h1>
-        <span class="text-muted text-sm">February 2026</span>
       </div>
 
       <div class="dashboard-grid">
         <div class="card stat-card">
-          <span class="stat-label">Total Balance</span>
-          <span class="stat-value" style="color: var(--color-primary-600);" id="total-balance">$0.00</span>
+          <span class="stat-label">Total Records</span>
+          <span class="stat-value" id="total-records">0</span>
         </div>
         <div class="card stat-card">
-          <span class="stat-label">Monthly Spend</span>
-          <span class="stat-value" id="monthly-spend">$0.00</span>
+          <span class="stat-label">Sum of Values</span>
+          <span class="stat-value" id="total-amount">$0.00</span>
         </div>
         <div class="card stat-card">
-          <span class="stat-label">Remaining Budget</span>
-          <span class="stat-value" style="color: var(--color-success)" id="remaining-budget">$0.00</span>
+          <span class="stat-label">Top Category</span>
+          <span class="stat-value" id="top-category">-</span>
         </div>
       </div>
 

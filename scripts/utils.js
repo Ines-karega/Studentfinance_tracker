@@ -31,3 +31,43 @@ function showToast(message, type = 'info') {
         });
     }, 5000);
 }
+// Theme Management
+function initTheme() {
+    const theme = localStorage.getItem('sf_theme') || 'light';
+    if (theme === 'dark') {
+        document.documentElement.classList.add('dark-theme');
+    }
+}
+
+function toggleTheme() {
+    const isDark = document.documentElement.classList.toggle('dark-theme');
+    localStorage.setItem('sf_theme', isDark ? 'dark' : 'light');
+    return isDark;
+}
+
+// Currency Management
+const EXCHANGE_RATES = {
+    USD: 1,
+    EUR: 0.92,
+    GBP: 0.79,
+    RWF: 1280
+};
+
+const CURRENCY_SYMBOLS = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    RWF: 'FRW '
+};
+
+function formatCurrency(amount) {
+    const currency = localStorage.getItem('sf_currency') || 'USD';
+    const rate = EXCHANGE_RATES[currency] || 1;
+    const symbol = CURRENCY_SYMBOLS[currency] || '$';
+    const converted = amount * rate;
+
+    return `${symbol}${converted.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+// Initialize on load
+initTheme();
