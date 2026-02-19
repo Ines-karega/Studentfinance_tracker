@@ -179,23 +179,33 @@
 
         <div class="card" style="margin-top: var(--space-6);">
             <h2>Data Management</h2>
-            <p class="text-muted text-sm mb-4">Manage your local data. Use "Export Data" to save a copy of your records.
-            </p>
+            <p class="text-muted text-sm mb-6">Take control of your financial records. Export for backup or import from
+                a previous session.</p>
 
-            <div class="flex flex-col gap-6">
-                <div>
-                    <h3 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Export/Clear</h3>
-                    <div class="flex gap-4">
-                        <button id="export-btn" class="btn btn-outline">Export Data (JSON)</button>
-                        <button id="clear-btn" class="btn btn-danger">Clear All Data</button>
-                    </div>
+            <div class="grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6);">
+                <div class="card"
+                    style="background: var(--bg-card-secondary); border: 1px dashed var(--color-gray-300); transform: none; box-shadow: none;">
+                    <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2);">Export & Backup</h3>
+                    <p class="text-muted text-sm mb-4">Download all your transactions as a JSON file to keep them safe.
+                    </p>
+                    <button id="export-btn" class="btn btn-outline" style="width: 100%;">Download JSON</button>
                 </div>
 
-                <div style="border-top: 1px solid var(--color-gray-100); padding-top: var(--space-4);">
-                    <h3 style="font-size: var(--text-base); margin-bottom: var(--space-2);">Import Data</h3>
-                    <p class="text-muted text-sm mb-4">Upload a JSON file to add records to your tracker.</p>
+                <div class="card"
+                    style="background: var(--bg-card-secondary); border: 1px dashed var(--color-gray-300); transform: none; box-shadow: none;">
+                    <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2);">Import Records</h3>
+                    <p class="text-muted text-sm mb-4">Restore your data from a JSON backup file.</p>
                     <input type="file" id="import-file" accept=".json" class="hidden">
-                    <button id="import-btn" class="btn btn-primary">Import JSON File</button>
+                    <button id="import-btn" class="btn btn-primary" style="width: 100%;">Upload File</button>
+                </div>
+
+                <div class="card card-danger" style="transform: none; box-shadow: none;">
+                    <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2); color: inherit;">Reset System
+                    </h3>
+                    <p class="text-sm mb-4" style="color: inherit; opacity: 0.8;">Permanently erase all transaction data
+                        from this device.</p>
+                    <button id="clear-btn" class="btn btn-danger" style="width: 100%;">Clear Everything</button>
                 </div>
             </div>
         </div>
