@@ -64,3 +64,22 @@ a:hover {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--color-gray-400);
 }
+
+/* Skip-to-Content Link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-primary-600);
+    color: white;
+    padding: 8px;
+    z-index: 1000;
+    transition: top 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0 0 8px 0;
+}
+
+.skip-link:focus {
+    top: 0;
+}

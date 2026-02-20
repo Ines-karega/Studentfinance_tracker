@@ -75,6 +75,8 @@
 
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to Content</a>
+
   <header class="app-header">
     <div class="container nav-container">
       <div class="brand">
@@ -100,7 +102,7 @@
     </div>
   </header>
 
-  <main class="container" style="padding-top: var(--space-8); padding-bottom: var(--space-8);">
+  <main id="main-content" class="container" style="padding-top: var(--space-8); padding-bottom: var(--space-8);">
 
     <!-- DASHBOARD SECTION -->
     <section id="dashboard" class="mb-12">
@@ -121,7 +123,7 @@
         </div>
         <div class="card stat-card">
           <span class="stat-label">Budget Status</span>
-          <span class="stat-value" id="budget-status">-</span>
+          <span class="stat-value" id="budget-status" role="status">-</span>
         </div>
       </div>
 
