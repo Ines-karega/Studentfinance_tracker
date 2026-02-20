@@ -1,60 +1,65 @@
-# Student Finance Tracker (UI Prototype)
+# Student Finance Tracker
 
-A modern, responsive, and accessible user interface for a Student Finance Tracker application. This project demonstrates semantic HTML5, modern CSS (Flexbox, Grid, Custom Properties), and a mobile-first design approach without the use of any external frameworks.
+A powerful, privacy-focused, and fully functional vanilla JavaScript application for students to manage their finances. This project features a modern responsive UI, real-time data visualization, and comprehensive data management, all without the need for external frameworks or a backend.
 
-## Features
+## Key Features
 
-- **Responsive Design**:
-  - **Mobile**: Card-based layouts, simplified navigation with toggle.
-  - **Desktop/Tablet**: Full data tables, expanded dashboard, and sticky navigation.
-- **Modern UI Components**:
-  - Dashboard with summary cards and chart placeholders.
-  - Transactions list that adapts from a table (desktop) to cards (mobile).
-  - Add Transaction Modal (`<dialog>`).
-  - Settings page with custom toggle switches.
-- **Theming**:
-  - Comprehensive CSS variable system for easy theming.
-  - Dark/Light mode toggle hook (UI only).
+- **Personalized Dashboard**:
+  - Real-time summary of total balance, monthly spending, and budget status.
+  - **7-Day Spending Trend**: Dynamic bar chart showing your daily expense patterns.
+- **Transaction Management**:
+  - Full CRUD functionality: Add, view, edit, and delete transactions.
+  - **Smart Filtering**: Live search and category-based filtering.
+  - **Advanced Sorting**: Sort records by date, amount, or category.
+- **User Preferences**:
+  - **Dark Mode**: High-contrast theme that persists across sessions.
+  - **Currency Conversion**: Support for USD, EUR, GBP, and RWF with estimated conversion rates.
+  - **Budget Target**: Set a monthly spending goal and track your progress in real-time.
+- **Data Portability**:
+  - **JSON Export**: Backup your entire financial history to a local file.
+  - **JSON Import**: Restore or merge data from previous backups with built-in validation.
+- **Persistence**: All data is securely stored locally in your browser's `localStorage`.
+- **Responsive Design**: Fully optimized for mobile, tablet, and desktop viewports.
 
 ## Setup & Usage
 
-Since this is a vanilla HTML/CSS project, no build step is required.
+Since this is a vanilla HTML/CSS/JS project, no installation or build step is required.
 
-1.  Clone the repository or download the files.
-2.  Open `index.html` in any modern web browser.
-    -   *Tip: Use "Open File" in your browser or drag-and-drop the file.*
+1.  **Download**: Clone or download the project files.
+2.  **Launch**: Open `index.html` in your web browser.
+3.  **Start Tracking**: Add your first transaction to see the dashboard come to life.
 
-## Accessibility
+## Accessibility & Design
 
-- **Semantic HTML**: Uses proper landmarks (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`) for screen reader navigation.
-- **Keyboard Navigation**:
-  - Interactive elements (buttons, links, inputs) have visible focus states.
-  - Skip links and proper heading hierarchy (h1-h3) are maintained.
-- **Colors**: High contrast color palette (Deep Indigo & Text on White) ensures readability.
-
-## Responsiveness
-
-The layout is optimized for:
-- **Mobile (360px+)**: Stacked layout, hidden nav menu (accessible via hamburger toggle).
-- **Tablet (768px+)**: Two-column grids where appropriate, side-by-side form elements.
-- **Desktop (1024px+)**: Full-width dashboard and data tables.
+- **Semantic HTML5**: Uses proper landmarks (`<header>`, `<main>`, `<section>`) and accessible ARIA attributes where needed.
+- **Design System**: Built on a robust CSS variable system for consistent spacing, typography (Inter & Outfit), and colors.
+- **Dark Theme**: Specifically engineered for reduced eye strain and high readability.
+- **Zero Frameworks**: 100% Vanilla JS, CSS, and HTML for maximum performance and compatibility.
 
 ## Project Structure
 
 ```text
 /
-├── index.html            # Dashboard
-├── transactions.html     # Transactions List & Add Modal
-├── settings.html         # Settings (Theme, Currency)
-├── about.html            # About & Contact Info
-└── styles/
-    ├── reset.css         # Modern CSS reset
-    ├── variables.css     # Design tokens (colors, typography, spacing)
-    ├── global.css        # Base styles and typography
-    └── components.css    # UI components (Cards, Buttons, Forms, Modals)
+├── index.html            # Dashboard & Spending Trends
+├── transactions.html     # Transaction Management Interface
+├── add-transaction.html  # Dedicated Add Transaction Form
+├── settings.html         # User Preferences & Data Management
+├── about.html            # Documentation & Developer Info
+├── styles/
+│   ├── variables.css     # Design tokens & Theme overrides
+│   ├── components.css    # Centralized UI components & Responsive logic
+│   ├── global.css        # Base layout & Typography
+│   └── reset.css         # CSS Normalization
+└── scripts/
+    ├── utils.js          # Theme manager, Currency formatter, & Shared helpers
+    ├── dashboard.js      # Aggregation logic & Chart rendering
+    ├── transactions.js   # CRUD operations & Table management
+    ├── settings.js       # Preference handling & Import/Export logic
+    └── add-transaction.js # Form validation & Entry creation
 ```
 
 ## Credits
 
-- **Fonts**: [Inter](https://fonts.google.com/specimen/Inter) and [Outfit](https://fonts.google.com/specimen/Outfit) via Google Fonts.
-- **Icons**: Uses standard unicode emojis for this prototype (can be replaced with SVG/FontAwesome).
+- **Fonts**: [Inter](https://fonts.google.com/specimen/Inter) and [Outfit](https://fonts.google.com/specimen/Outfit).
+- **Icons**: Lean, CSS-based iconography (no external image assets or emoji dependencies).
+- **Developed by**: Ines Uwase Karega
