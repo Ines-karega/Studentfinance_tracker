@@ -31,7 +31,10 @@ Since this is a vanilla HTML/CSS/JS project, no installation or build step is re
 
 ## Accessibility & Design
 
-- **Semantic HTML5**: Uses proper landmarks (`<header>`, `<main>`, `<section>`) and accessible ARIA attributes where needed.
+- **Semantic HTML5**: Uses proper landmarks (`<header>`, `<main>`, `<section>`), accessible ARIA roles, and **Skip to Content** links for efficient screen reader navigation.
+- **Strict Data Validation**:
+  - Descriptions are validated against accidental leading/trailing whitespace.
+  - **Duplicate Word Check**: Intelligent regex detects repeated words (e.g., "Food Food") to maintain data quality.
 - **Design System**: Built on a robust CSS variable system for consistent spacing, typography (Inter & Outfit), and colors.
 - **Dark Theme**: Specifically engineered for reduced eye strain and high readability.
 - **Zero Frameworks**: 100% Vanilla JS, CSS, and HTML for maximum performance and compatibility.

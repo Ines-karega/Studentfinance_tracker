@@ -11,7 +11,7 @@ document.getElementById('add-form').addEventListener('submit', function (e) {
 
     // Regex patterns (Strictly aligned with rubric requirements)
     // 1. Description: allow alphanumeric, collapse doubles/forbid trim (simplified version)
-    const descriptionRegex = /^\S(?:.*\S)?$/;
+    const descriptionRegex = /^(?=.*[a-zA-Z0-9])[a-zA-Z0-9 ]+$/;
     // 2. Numeric: basic decimal validation
     const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/;
     // 3. Advanced: Back-reference to catch duplicate words (e.g., "Lunch Lunch")
