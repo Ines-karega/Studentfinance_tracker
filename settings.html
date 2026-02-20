@@ -18,94 +18,6 @@
 
     <style>
         /* Page Specific Layout */
-        .app-header {
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--color-gray-200);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 4rem;
-        }
-
-        .brand {
-            font-family: var(--font-family-display);
-            font-size: var(--text-xl);
-            font-weight: var(--font-weight-bold);
-            color: var(--color-primary-600);
-            display: flex;
-            align-items: center;
-            gap: var(--space-2);
-        }
-
-        .main-nav {
-            display: flex;
-            gap: var(--space-6);
-        }
-
-        .nav-link {
-            color: var(--text-muted);
-            font-weight: var(--font-weight-medium);
-            padding: var(--space-2);
-            border-radius: var(--radius-md);
-            transition: color var(--transition-base);
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--color-primary-600);
-            background-color: var(--color-primary-100);
-        }
-
-        /* Mobile Responsive Logic */
-        @media (max-width: 768px) {
-            .main-nav {
-                display: none;
-                position: absolute;
-                top: 4rem;
-                left: 0;
-                right: 0;
-                background-color: var(--bg-card);
-                flex-direction: column;
-                padding: var(--space-4);
-                box-shadow: var(--shadow-md);
-                border-bottom: 1px solid var(--color-gray-200);
-            }
-
-            /* Checkbox Hack for Mobile Menu */
-            #nav-toggle:checked~.main-nav {
-                display: flex;
-            }
-
-            .nav-toggle-label {
-                display: flex;
-                flex-direction: column;
-                gap: 5px;
-                cursor: pointer;
-                padding: var(--space-2);
-            }
-
-            .nav-toggle-label span {
-                display: block;
-                width: 24px;
-                height: 2px;
-                background-color: var(--text-main);
-            }
-        }
-
-        @media (min-width: 769px) {
-
-            .nav-toggle-label,
-            #nav-toggle {
-                display: none;
-            }
-        }
-
         footer {
             margin-top: auto;
             border-top: 1px solid var(--color-gray-200);
@@ -184,45 +96,44 @@
                     <p class="text-muted text-sm mt-2">Set a target to track your spending progress on the dashboard.
                     </p>
                 </div>
-
             </div>
+        </div>
 
-            <div class="card" style="margin-top: var(--space-6);">
-                <h2>Data Management</h2>
-                <p class="text-muted text-sm mb-6">Take control of your financial records. Export for backup or import
-                    from
-                    a previous session.</p>
+        <div class="card" style="margin-top: var(--space-6);">
+            <h2>Data Management</h2>
+            <p class="text-muted text-sm mb-6">Take control of your financial records. Export for backup or import
+                from
+                a previous session.</p>
 
-                <div class="grid"
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6);">
-                    <div class="card"
-                        style="background: var(--bg-card-secondary); border: 1px dashed var(--color-gray-300); transform: none; box-shadow: none;">
-                        <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2);">Export & Backup</h3>
-                        <p class="text-muted text-sm mb-4">Download all your transactions as a JSON file to keep them
-                            safe.
-                        </p>
-                        <button id="export-btn" class="btn btn-outline" style="width: 100%;">Download JSON</button>
-                    </div>
+            <div class="grid grid-responsive" style="margin-top: var(--space-4);">
+                <div class="card"
+                    style="background: var(--bg-card-secondary); border: 1px dashed var(--color-gray-300); transform: none; box-shadow: none;">
+                    <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2);">Export & Backup</h3>
+                    <p class="text-muted text-sm mb-4">Download all your transactions as a JSON file to keep them
+                        safe.
+                    </p>
+                    <button id="export-btn" class="btn btn-outline" style="width: 100%;">Download JSON</button>
+                </div>
 
-                    <div class="card"
-                        style="background: var(--bg-card-secondary); border: 1px dashed var(--color-gray-300); transform: none; box-shadow: none;">
-                        <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2);">Import Records</h3>
-                        <p class="text-muted text-sm mb-4">Restore your data from a JSON backup file.</p>
-                        <input type="file" id="import-file" accept=".json" class="hidden">
-                        <button id="import-btn" class="btn btn-primary" style="width: 100%;">Upload File</button>
-                    </div>
+                <div class="card"
+                    style="background: var(--bg-card-secondary); border: 1px dashed var(--color-gray-300); transform: none; box-shadow: none;">
+                    <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2);">Import Records</h3>
+                    <p class="text-muted text-sm mb-4">Restore your data from a JSON backup file.</p>
+                    <input type="file" id="import-file" accept=".json" class="hidden">
+                    <button id="import-btn" class="btn btn-primary" style="width: 100%;">Upload File</button>
+                </div>
 
-                    <div class="card card-danger" style="transform: none; box-shadow: none;">
-                        <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2); color: inherit;">Reset
-                            System
-                        </h3>
-                        <p class="text-sm mb-4" style="color: inherit; opacity: 0.8;">Permanently erase all transaction
-                            data
-                            from this device.</p>
-                        <button id="clear-btn" class="btn btn-danger" style="width: 100%;">Clear Everything</button>
-                    </div>
+                <div class="card card-danger" style="transform: none; box-shadow: none;">
+                    <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-2); color: inherit;">Reset
+                        System
+                    </h3>
+                    <p class="text-sm mb-4" style="color: inherit; opacity: 0.8;">Permanently erase all transaction
+                        data
+                        from this device.</p>
+                    <button id="clear-btn" class="btn btn-danger" style="width: 100%;">Clear Everything</button>
                 </div>
             </div>
+        </div>
 
     </main>
 
