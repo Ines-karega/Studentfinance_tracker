@@ -20,7 +20,15 @@ A powerful, privacy-focused, and fully functional vanilla JavaScript application
 - **Persistence**: All data is securely stored locally in your browser's `localStorage`.
 - **Responsive Design**: Fully optimized for mobile, tablet, and desktop viewports.
 
+## Sketches
+
+![Dashboard Sketch](./assets/dashboard.jpeg)
+![Transactions Sketch](./assets/transactions.jpeg)
+![Settings Sketch](./assets/settings.jpeg)
+![About Sketch](./assets/about.jpeg)
+
 ## [LIVE DEMO (GitHub Pages)](https://ines-karega.github.io/Studentfinance_tracker/)
+## [DEMO VIDEO](https://www.youtube.com/watch?v=8DVUQlZu1Lg)
 ## [REPOSITORY URL](https://github.com/Ines-karega/Studentfinance_tracker)
 
 ## Regex Catalog
