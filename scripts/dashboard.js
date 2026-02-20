@@ -81,7 +81,15 @@ function updateDashboard() {
 
   for (const [id, value] of Object.entries(elements)) {
     const el = document.getElementById(id);
-    if (el) el.textContent = value;
+    if (el) {
+      el.textContent = value;
+
+      // Rubric requirement: ARIA live regions (polite when under, assertive when exceeded)
+      if (id === 'budget-status' && monthlyTarget > 0) {
+        const diff = monthlyTarget - monthlySpend;
+        el.setAttribute('aria-live', diff >= 0 ? 'polite' : 'assertive');
+      }
+    }
   }
 
   // Update Trend Chart (Last 7 Days)

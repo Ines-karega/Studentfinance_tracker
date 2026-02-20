@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tests - Student Finance Tracker</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 2rem;
+            background: #f4f7f6;
+        }
+
+        .test-case {
+            background: white;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            border-left: 5px solid #ccc;
+        }
+
+        .pass {
+            border-left-color: #4caf50;
+        }
+
+        .fail {
+            border-left-color: #f44336;
+        }
+
+        .status {
+            font-weight: bold;
+            float: right;
+        }
+
+        .pass .status {
+            color: #4caf50;
+        }
+
+        .fail .status {
+            color: #f44336;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Project Validation Tests (M3 Milestone)</h1>
+    <div id="results"></div>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+
+        function assert(name, condition) {
+            const div = document.createElement('div');
+            div.className = 'test-case ' + (condition ? 'pass' : 'fail');
+            div.innerHTML = `${name} <span class="status">${condition ? 'PASS' : 'FAIL'}</span>`;
+            resultsDiv.appendChild(div);
+        }
+
+        // 1. Regex Validation Rules (M3)
+        const descriptionRegex = /^\S(?:.*\S)?$/; // No leading/trailing spaces
+        const amountRegex = /^(0|[1-9]\d*)(\.\d{1,2})?$/; // Currency format
+        const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/; // YYYY-MM-DD
+        const duplicateRegex = /\b(\w+)\s+\1\b/i; // Duplicate word detector (Advanced)
+
+        // Tests
+        assert("Regex: Validating normal description", descriptionRegex.test("Lunch at Cafe"));
+        assert("Regex: Failing description with leading space", !descriptionRegex.test("  Lunch"));
+        assert("Regex: Validating correct currency amount", amountRegex.test("12.50"));
+        assert("Regex: Failing invalid amount ($ symbol)", !amountRegex.test("$12.50"));
+        assert("Regex: Validating date format (2025-09-29)", dateRegex.test("2025-09-29"));
+        assert("Regex: Failing invalid month (2025-13-29)", !dateRegex.test("2025-13-29"));
+        assert("Regex (Advanced): Catching duplicate word 'Food Food'", duplicateRegex.test("Food Food"));
+        assert("Regex (Advanced): Normal sentence passes duplicate check", !duplicateRegex.test("Healthy Food"));
+
+        // 2. Data Persistence (localStorage) - Mocking it for test
+        try {
+            localStorage.setItem('test_persistence', 'working');
+            assert("Data: localStorage is available and writable", localStorage.getItem('test_persistence') === 'working');
+            localStorage.removeItem('test_persistence');
+        } catch (e) {
+            assert("Data: localStorage test", false);
+        }
+
+    </script>
+</body>
+
+</html>

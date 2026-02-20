@@ -1,0 +1,123 @@
+[
+    {
+        "id": "txn_seed_001",
+        "description": "Alu Monthly Stipend",
+        "amount": 500.00,
+        "category": "Allowance",
+        "type": "income",
+        "date": "2026-02-01",
+        "notes": "Regular monthly allowance",
+        "createdAt": "2026-02-01T08:00:00.000Z",
+        "updatedAt": "2026-02-01T08:00:00.000Z"
+    },
+    {
+        "id": "txn_seed_002",
+        "description": "Mathematics Textbook",
+        "amount": 85.50,
+        "category": "Books",
+        "type": "expense",
+        "date": "2026-02-05",
+        "notes": "Required for Semester 2",
+        "createdAt": "2026-02-05T10:30:00.000Z",
+        "updatedAt": "2026-02-05T10:30:00.000Z"
+    },
+    {
+        "id": "txn_seed_003",
+        "description": "Vibrant Cafe Lunch",
+        "amount": 12.00,
+        "category": "Food",
+        "type": "expense",
+        "date": "2026-02-10",
+        "notes": "Burger and soda",
+        "createdAt": "2026-02-10T12:45:00.000Z",
+        "updatedAt": "2026-02-10T12:45:00.000Z"
+    },
+    {
+        "id": "txn_seed_004",
+        "description": "Monthly Bus Pass",
+        "amount": 45.00,
+        "category": "Transport",
+        "type": "expense",
+        "date": "2026-02-02",
+        "notes": "Kigali bus pass",
+        "createdAt": "2026-02-02T09:00:00.000Z",
+        "updatedAt": "2026-02-02T09:00:00.000Z"
+    },
+    {
+        "id": "txn_seed_005",
+        "description": "Movie Night with Friends",
+        "amount": 25.75,
+        "category": "Entertainment",
+        "type": "expense",
+        "date": "2026-02-14",
+        "notes": "Valentine's special",
+        "createdAt": "2026-02-14T20:00:00.000Z",
+        "updatedAt": "2026-02-14T20:00:00.000Z"
+    },
+    {
+        "id": "txn_seed_006",
+        "description": "Lab Equipment Fee",
+        "amount": 120.00,
+        "category": "Fees",
+        "type": "expense",
+        "date": "2026-02-18",
+        "notes": "Chemistry lab deposit",
+        "createdAt": "2026-02-18T14:20:00.000Z",
+        "updatedAt": "2026-02-18T14:20:00.000Z"
+    },
+    {
+        "id": "txn_seed_007",
+        "description": "Freelance Design Gig",
+        "amount": 150.00,
+        "category": "Salary",
+        "type": "income",
+        "date": "2026-02-15",
+        "notes": "Logo design for local shop",
+        "createdAt": "2026-02-15T16:00:00.000Z",
+        "updatedAt": "2026-02-15T16:00:00.000Z"
+    },
+    {
+        "id": "txn_seed_008",
+        "description": "Birthday Gift from Parents",
+        "amount": 100.00,
+        "category": "Allowance",
+        "type": "income",
+        "date": "2026-02-20",
+        "notes": "Extra cash for birthday",
+        "createdAt": "2026-02-20T10:00:00.000Z",
+        "updatedAt": "2026-02-20T10:00:00.000Z"
+    },
+    {
+        "id": "txn_seed_009",
+        "description": "Pizza Party",
+        "amount": 35.00,
+        "category": "Food",
+        "type": "expense",
+        "date": "2026-02-19",
+        "notes": "Dorm party contribution",
+        "createdAt": "2026-02-19T19:30:00.000Z",
+        "updatedAt": "2026-02-19T19:30:00.000Z"
+    },
+    {
+        "id": "txn_seed_010",
+        "description": "Internet Data Bundle",
+        "amount": 10.00,
+        "category": "Other",
+        "type": "expense",
+        "date": "2026-02-21",
+        "notes": "Weekly unlimited data",
+        "createdAt": "2026-02-21T08:30:00.000Z",
+        "updatedAt": "2026-02-21T08:30:00.000Z"
+    },
+    {
+        "id": "txn_seed_011",
+        "description": "Second Hand Sneakers",
+        "amount": 40.00,
+        "category": "Other",
+        "type": "expense",
+        "date": "2026-02-22",
+        "notes": "Market find",
+        "createdAt": "2026-02-22T11:00:00.000Z",
+        "updatedAt": "2026-02-22T11:00:00.000Z"
+    }
+]

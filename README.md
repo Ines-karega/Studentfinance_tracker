@@ -1,6 +1,5 @@
-# Student Finance Tracker
-
 A powerful, privacy-focused, and fully functional vanilla JavaScript application for students to manage their finances. This project features a modern responsive UI, real-time data visualization, and comprehensive data management, all without the need for external frameworks or a backend.
+
 
 ## Key Features
 
@@ -20,6 +19,41 @@ A powerful, privacy-focused, and fully functional vanilla JavaScript application
   - **JSON Import**: Restore or merge data from previous backups with built-in validation.
 - **Persistence**: All data is securely stored locally in your browser's `localStorage`.
 - **Responsive Design**: Fully optimized for mobile, tablet, and desktop viewports.
+
+## [LIVE DEMO (GitHub Pages)](https://ines-karega.github.io/Studentfinance_tracker/)
+## [REPOSITORY URL](https://github.com/Ines-karega/Studentfinance_tracker)
+
+## Regex Catalog
+
+| Rule | Pattern | Example | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Description** | `/^\S(?:.*\S)?$/` | "Cafe Lunch" | Forbids leading/trailing spaces. |
+| **Amount** | `/^(0|[1-9]\d*)(\.\d{1,2})?$/` | "12.50" | Standard currency format (max 2 decimals). |
+| **Date** | `/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/` | "2025-09-29" | Strict YYYY-MM-DD validation. |
+| **Advanced (Duplicate)** | `/\b(\w+)\s+\1\b/i` | "Food Food" | Catches unintentional word repetition. |
+
+## Keyboard Navigation Map
+
+- **Tab**: Move focus forward through links, buttons, and form fields.
+- **Shift + Tab**: Move focus backward.
+- **Enter / Space**: Activate focused buttons or menu items.
+- **Esc**: (If applicable) Close focused dialogs or menus.
+- **Skip Link**: Press `Tab` once on refresh to show "Skip to Content".
+
+## Accessibility Notes
+
+- **ARIA Landmarks**: Uses `<header>`, `<main id="main-content">`, `<nav>`, and `<section>` for assistive navigation.
+- **Focus Indicators**: High-contrast rings on all interactive elements.
+- **Live Regions**: Budget status card uses `role="status"` to announce over-limit warnings immediately.
+- **Contrast Check**: Colors meet WCAG AA standards for readability.
+
+## Testing Instructions
+
+1.  **Automated Regex Tests**: Open `tests.html` in any browser to see the unit test suite and regex assertions.
+2.  **Manual A11y Audit**:
+    - Refresh any page and press `Tab`. Verify "Skip to Content" appears.
+    - Navigate to "Add Transaction" and try typing "Lunch Lunch". Verify the duplicate detector triggers.
+3.  **Data Integrity**: Export your data via Settings, Clear it, and then Import it back to verify persistence logic.
 
 ## Setup & Usage
 

@@ -35,6 +35,7 @@ document.getElementById('add-form').addEventListener('submit', function (e) {
         return;
     }
 
+    const now = new Date().toISOString();
     const newTransaction = {
         id: Date.now().toString(),
         description,
@@ -42,7 +43,9 @@ document.getElementById('add-form').addEventListener('submit', function (e) {
         type,
         category,
         date,
-        notes
+        notes,
+        createdAt: now,
+        updatedAt: now
     };
 
     // Get existing transactions or initialize empty array
