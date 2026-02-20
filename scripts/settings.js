@@ -21,6 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Monthly Budget Target
+    const targetInput = document.getElementById('target-input');
+    const saveTargetBtn = document.getElementById('save-target-btn');
+    const currentTarget = localStorage.getItem('sf_monthly_target') || '';
+
+    if (targetInput) {
+        targetInput.value = currentTarget;
+        if (saveTargetBtn) {
+            saveTargetBtn.addEventListener('click', () => {
+                const value = targetInput.value.trim();
+                localStorage.setItem('sf_monthly_target', value);
+                showToast(`Monthly target saved: ${value || 'None'}`, 'success');
+            });
+        }
+    }
+
     // Data Management
     const exportBtn = document.getElementById('export-btn');
     const clearBtn = document.getElementById('clear-btn');

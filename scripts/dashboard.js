@@ -55,13 +55,28 @@ function updateDashboard() {
     }
   }
 
+  // Calculate Budget Status
+  const monthlyTarget = parseFloat(localStorage.getItem('sf_monthly_target')) || 0;
+  let budgetStatus = '-';
+  if (monthlyTarget > 0) {
+    const diff = monthlyTarget - monthlySpend;
+    if (diff >= 0) {
+      budgetStatus = `Remaining ${formatCurrency(diff)}`;
+    } else {
+      budgetStatus = `Over by ${formatCurrency(Math.abs(diff))}`;
+    }
+  } else {
+    budgetStatus = 'Target not set';
+  }
+
   // Update UI Stats (with safety checks for removed elements)
   const elements = {
     'total-records': transactions.length.toString(),
     'total-amount': formatCurrency(totalAmount),
     'top-category': topCategory,
     'total-balance': formatCurrency(totalBalance),
-    'monthly-spend': formatCurrency(monthlySpend)
+    'monthly-spend': formatCurrency(monthlySpend),
+    'budget-status': budgetStatus
   };
 
   for (const [id, value] of Object.entries(elements)) {
